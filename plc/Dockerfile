@@ -1,4 +1,4 @@
-FROM zakharbz/labshock-plc:v1.0.0
+FROM turzum/openplc:latest
 
 # app data files
 COPY ./appdata/st_files /workdir/webserver/st_files
