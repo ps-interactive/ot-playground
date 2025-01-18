@@ -1,0 +1,57 @@
+version: '3.9'
+
+networks:
+  l2_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+  l3_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.3.0/24
+
+services:
+  router:
+    image: zakharbz/labshock-router:v1.0.0
+    mem_limit: 256m
+    privileged: true
+    restart: unless-stopped
+    networks:
+      l2_network:
+        ipv4_address: 192.168.2.254
+      l3_network:
+        ipv4_address: 192.168.3.254
+
+  scada:
+    build: ./scada/
+    mem_limit: 1024m
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    networks:
+      l3_network:
+        ipv4_address: 192.168.3.20
+    ports:
+      - '1881:1881'
+    volumes:
+      - scada-data:/usr/src/app/FUXA/server/_appdata
+      
+  plc:
+    build: ./plc/
+    mem_limit: 512m
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    networks:
+      l2_network:
+        ipv4_address: 192.168.2.10
+    ports:
+      - "8080:8080"
+    volumes:
+      - plc-data:/workdir/webserver
+
+volumes:
+  scada-data:
+  plc-data:
