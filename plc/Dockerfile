@@ -1,4 +1,5 @@
 FROM zakharbz/labshock-plc:v1.0.0
+
 # app data files
 COPY ./appdata/st_files /workdir/webserver/st_files
 COPY ./appdata/openplc.db /workdir/webserver/openplc.db
