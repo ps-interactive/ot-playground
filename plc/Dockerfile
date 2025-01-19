@@ -1,4 +1,4 @@
-FROM zturzum/openplc:latest
+FROM turzum/openplc:latest
 # app data files
 COPY ./appdata/st_files /workdir/webserver/st_files
 COPY ./appdata/openplc.db /workdir/webserver/openplc.db
