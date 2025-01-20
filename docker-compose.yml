@@ -51,6 +51,7 @@ services:
         ipv4_address: 192.168.2.10
     ports:
       - "8080:8080"
+      - "502:502"
     volumes:
       - plc-data:/workdir/webserver
 
