@@ -23,6 +23,8 @@ services:
         ipv4_address: 192.168.2.254
       l3_network:
         ipv4_address: 192.168.3.254
+      l4_network:
+        ipv4_address: 172.31.24.1
 
   scada:
     build: ./scada/
