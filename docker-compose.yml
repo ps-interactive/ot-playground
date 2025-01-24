@@ -62,7 +62,7 @@ services:
     volumes:
       - ews-data:/home/engineer/
 
-ews-win:
+  ews-win:
     image: dockurr/windows
     container_name: windows
     environment:
