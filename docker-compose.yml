@@ -61,7 +61,20 @@ services:
       - "5911:5911"
     volumes:
       - ews-data:/home/engineer/
-    
+
+  pentest:
+    build: ./pentest/
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    privileged: true
+    restart: unless-stopped
+    networks:
+      l3_network:
+        ipv4_address: 192.168.3.30
+    ports:
+      - "2222:22"
+
 volumes:
   scada-data:
   plc-data:
